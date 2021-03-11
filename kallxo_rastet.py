@@ -1,23 +1,8 @@
-import os
+from os import getcwd
 import requests
 from bs4 import BeautifulSoup
 
-CURRENT_DIR = os.getcwd()
-
-def get_rastet_net():
-    url= 'https://kallxo.com/'
-    r = requests.get(url)
-    soup = BeautifulSoup(r.content,'html.parser')
-    notif_table = soup.find("div", {"class": "notification_bar__info"})
-    infos = notif_table.find_all('h4')
-    
-
-
-    kallxo = []
-    for info in infos:
-        net = info.split(' ')[-1].replace(",", "").replace("\n", "").text
-        kallxo.append(int(net))
-    return kallxo
+CURRENT_DIR = getcwd()
 
 
 def get_rastet_net():
@@ -25,6 +10,19 @@ def get_rastet_net():
     Qitu i lexojme rastet nga kallxo.com
     return: liste [infektuar, sheruar, vdekur] prej internetit
     """
+    url = 'https://kallxo.com/'
+    r = requests.get(url)
+    soup = BeautifulSoup(r.content, 'html.parser')
+    notif_table = soup.find("div", {"class": "notification_bar__info"})
+    infos = notif_table.find_all('h4')
+    
+    kallxo = []
+    for info in infos:
+        info = info.text.replace('.', '')
+        net = info.split(' ')[-1].replace(",", "").replace("\n", "")
+        kallxo.append(int(net))
+    return kallxo
+
 
 
 def read_rastet():
