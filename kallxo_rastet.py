@@ -1,8 +1,14 @@
 from os import getcwd
+import platform
 import requests
 from bs4 import BeautifulSoup
 
 CURRENT_DIR = getcwd()
+
+if platform.system() == 'Linux':
+    sep = '/'
+else:
+    sep = '\\'
 
 
 def get_rastet_net():
@@ -30,7 +36,7 @@ def read_rastet():
     Qitu i lexojme rastet paraprake ne file
     return: liste [infektuar, sheruar, vdekur]
     """
-    f = open(CURRENT_DIR + '\\web\\info.txt', 'r')
+    f = open(CURRENT_DIR + '/info.txt', 'r')
     lines = f.readlines()
     f.close()
     stats = []
