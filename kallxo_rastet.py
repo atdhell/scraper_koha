@@ -20,9 +20,7 @@ def get_rastet_net():
     r = requests.get(url)
     soup = BeautifulSoup(r.content, 'html.parser')
     notif_table = soup.find("div", {"class": "notification_bar__info"})
-    infos = notif_table.find_all('h4')
-    
-    kallxo = []
+    infos = notif_table.find_all('h4') git reset --mixed 
     for info in infos:
         info = info.text.replace('.', '')
         net = info.split(' ')[-1].replace(",", "").replace("\n", "")
@@ -36,7 +34,7 @@ def read_rastet():
     Qitu i lexojme rastet paraprake ne file
     return: liste [infektuar, sheruar, vdekur]
     """
-    f = open(CURRENT_DIR + '/info.txt', 'r')
+    f = open(CURRENT_DIR + sep + 'info.txt', 'r') # koment
     lines = f.readlines()
     f.close()
     stats = []
