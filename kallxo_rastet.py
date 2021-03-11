@@ -19,35 +19,32 @@ def get_rastet_net():
         kallxo.append(int(net))
     return kallxo
 
-    
+
+def get_rastet_net():
+    """
+    Qitu i lexojme rastet nga kallxo.com
+    return: liste [infektuar, sheruar, vdekur] prej internetit
+    """
+
+
+def read_rastet():
+    """
+    Qitu i lexojme rastet paraprake ne file
+    return: liste [infektuar, sheruar, vdekur]
+    """
+    f = open(CURRENT_DIR + '\\web\\info.txt', 'r')
+    lines = f.readlines()
+    f.close()
+    stats = []
+    for line in lines:
+        shifra = line.split(' ')[-1].replace(",", "").replace("\n", "")  
+        stats.append(int(shifra))
+    return stats
 
 
 
-# def get_rastet_net():
-#     """
-#     Qitu i lexojme rastet nga kallxo.com
-#     return: liste [infektuar, sheruar, vdekur] prej internetit
-#     """
-
-
-# def read_rastet():
-#     """
-#     Qitu i lexojme rastet paraprake ne file
-#     return: liste [infektuar, sheruar, vdekur]
-#     """
-#     f = open(CURRENT_DIR + '\\web\\info.txt', 'r')
-#     lines = f.readlines()
-#     f.close()
-#     stats = []
-#     for line in lines:
-#         shifra = line.split(' ')[-1].replace(",", "").replace("\n", "")  
-#         stats.append(int(shifra))
-#     return stats
-
-
-
-# def send_notification():
-#     print("Nese ka raste te reja dergo notification")
+def send_notification():
+    print("Nese ka raste te reja dergo notification")
 
 
 
