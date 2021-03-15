@@ -33,12 +33,13 @@ def get_rastet_net():
 
 
 def write_rastet(lista_rasteve):
-    text_file = open("info.txt", "w")
+    text_file = open("info.txt", "a")
+    text_file.write('\n')
     text_file.write('---------------------------- \n')
     text_file.write("Data: " + data_sot + "\n")
-    text_file.write(" Te Infektuar : " + str(lista_rasteve[0])+ "\n")
-    text_file.write(" Te Sheruar : " + str(lista_rasteve[1]) + "\n")
-    text_file.write(" Te Vdekur : " + str(lista_rasteve[2]) + "\n")
+    text_file.write(" Te Infektuar: " + str(lista_rasteve[0])+ "\n")
+    text_file.write(" Te Sheruar: " + str(lista_rasteve[1]) + "\n")
+    text_file.write(" Te Vdekur: " + str(lista_rasteve[2]))
     text_file.close()
 
 
@@ -49,23 +50,34 @@ def read_rastet():
 
     f = open(CURRENT_DIR + sep + 'info.txt', 'r') # koment
     lines = f.readlines()
+    lines = lines[::-1]
+    lines = lines[0:3]
     f.close()
     stats = []
     for line in lines:
         shifra = line.split(' ')[-1].replace(",", "").replace("\n", "")
         stats.append(int(shifra))
-    return stats
+    return stats[::-1]
 
 
 def send_notification():
+    # Detyre me dergu notification ne PC
     print("Nese ka raste te reja dergo notification")
 
 
 if __name__ == '__main__':
     rastet_net = get_rastet_net()
     rastet_file = read_rastet()
-    write_rastet(rastet_net)
     
+    for i in range(3):
+        if rastet_file[i] != rastet_net[i]:
+            write_rastet(rastet_net)
+            send_notification()
+            break
+    else:
+        print('Nuk kemi update.')
+    
+
 
 
 
