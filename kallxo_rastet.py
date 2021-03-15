@@ -8,8 +8,8 @@ import datetime
 data_sot = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
 
 
-
 CURRENT_DIR = getcwd()
+URL = "https://kallxo.com/"
 
 if platform.system() == 'Linux':
     sep = '/'
@@ -20,9 +20,7 @@ else:
 def get_rastet_net():
     """Qitu i lexojme rastet nga kallxo.com
     #return: liste [infektuar, sheruar, vdekur] prej internetit"""
-
-    url = 'https://kallxo.com/'
-    r = requests.get(url)
+    r = requests.get(URL)
     soup = BeautifulSoup(r.content, 'html.parser')
     notif_table = soup.find("div", {"class": "notification_bar__info"})
     infos = notif_table.find_all('h4')
@@ -34,15 +32,12 @@ def get_rastet_net():
     return kallxo
 
 
-def write_rastet():
-    url = "https://kallxo.com/"
-    r = requests.get(url)
-    soup = BeautifulSoup(r.content, 'html.parser')
-    s = soup.find("div", {"class": "notification_bar__info"})
-
+def write_rastet(lista_rasteve):
     text_file = open("info.txt", "w")
-    for found in s:
-        text_file.write(found)
+    text_file.write('----------------------------')
+    text_file.write(data_sot)
+    text_file.writelines(lista_rasteve)
+    text_file.close()
 
 
 
@@ -60,12 +55,12 @@ def read_rastet():
     return stats
 
 
-
 def send_notification():
     print("Nese ka raste te reja dergo notification")
 
 
-
+if __name__ == '__main__':
+    print('main function')
 
 
 
