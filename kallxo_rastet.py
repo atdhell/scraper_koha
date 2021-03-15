@@ -1,4 +1,4 @@
-from os import getcwd
+from os import close, getcwd
 import platform
 import requests
 from bs4 import BeautifulSoup
@@ -34,9 +34,11 @@ def get_rastet_net():
 
 def write_rastet(lista_rasteve):
     text_file = open("info.txt", "w")
-    text_file.write('----------------------------')
-    text_file.write(data_sot)
-    text_file.writelines(lista_rasteve)
+    text_file.write('---------------------------- \n')
+    text_file.write("Data: " + data_sot + "\n")
+    text_file.write(" Te Infektuar : " + str(lista_rasteve[0])+ "\n")
+    text_file.write(" Te Sheruar : " + str(lista_rasteve[1]) + "\n")
+    text_file.write(" Te Vdekur : " + str(lista_rasteve[2]) + "\n")
     text_file.close()
 
 
@@ -60,7 +62,10 @@ def send_notification():
 
 
 if __name__ == '__main__':
-    print('main function')
+    rastet_net = get_rastet_net()
+    rastet_file = read_rastet()
+    write_rastet(rastet_net)
+    
 
 
 
