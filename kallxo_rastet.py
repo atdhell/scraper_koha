@@ -6,7 +6,6 @@ import datetime
 import pytz
 
 data_sot = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-print(data_sot)
 
 
 
@@ -19,44 +18,44 @@ else:
 
 
 def get_rastet_net():
-    """
-    Qitu i lexojme rastet nga kallxo.com
-    return: liste [infektuar, sheruar, vdekur] prej internetit
-    """
+    #Qitu i lexojme rastet nga kallxo.com
+    #return: liste [infektuar, sheruar, vdekur] prej internetit
+
     url = 'https://kallxo.com/'
     r = requests.get(url)
     soup = BeautifulSoup(r.content, 'html.parser')
     notif_table = soup.find("div", {"class": "notification_bar__info"})
     infos = notif_table.find_all('h4')
-    kallxo = []
-    for info in infos:
-        info = info.text.replace('.', '')
-        net = info.split(' ')[-1].replace(",", "").replace("\n", "")
-        kallxo.append(int(net))
-    return kallxo
+    print(data_sot)
+    print(infos)
+    # kallxo = []
+    # for info in infos:
+    #     info = info.text.replace('.', '')
+    #     net = info.split(' ')[-1].replace(",", "").replace("\n", "")
+    #     kallxo.append(int(net))
+    # return kallxo
 
 
 
-    def read_rastet():
-        """
-        Qitu i lexojme rastet paraprake ne file
-        return: liste [infektuar, sheruar, vdekur]
-        """
-        f = open(CURRENT_DIR + sep + 'info.txt', 'r') # koment
-        lines = f.readlines()
-
-    f.close()
-    stats = []
-    for line in lines:
-        shifra = line.split(' ')[-1].replace(",", "").replace("\n", "")  
-        stats.append(int(shifra))
-    return stats
-
-
-
-def send_notification():
-    print("Nese ka raste te reja dergo notification")
-
+#     def read_rastet():
+#
+#         #Qitu i lexojme rastet paraprake ne file
+#         #return: liste [infektuar, sheruar, vdekur]
+#
+#     f = open(CURRENT_DIR + sep + 'info.txt', 'r') # koment
+#     lines = f.readlines()
+#
+#     f.close()
+#     stats = []
+#     for line in lines:
+#         shifra = line.split(' ')[-1].replace(",", "").replace("\n", "")
+#         stats.append(int(shifra))
+#     return stats
+#
+#
+#
+# def send_notification():
+#     print("Nese ka raste te reja dergo notification")
 
 
 
