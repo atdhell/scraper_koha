@@ -1,15 +1,16 @@
 from os import close, getcwd
 import platform
+from win10toast import ToastNotifier
 import requests
 from bs4 import BeautifulSoup
 import datetime
-
+import time
 
 data_sot = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
 
-
 CURRENT_DIR = getcwd()
 URL = "https://kallxo.com/"
+
 
 if platform.system() == 'Linux':
     sep = '/'
@@ -18,8 +19,7 @@ else:
 
 
 def get_rastet_net():
-    """Qitu i lexojme rastet nga kallxo.com
-    #return: liste [infektuar, sheruar, vdekur] prej internetit"""
+    """Qitu i lexojme rastet nga kallxo.com return: liste [infektuar, sheruar, vdekur] prej internetit"""
     r = requests.get(URL)
     soup = BeautifulSoup(r.content, 'html.parser')
     notif_table = soup.find("div", {"class": "notification_bar__info"})
@@ -45,9 +45,7 @@ def write_rastet(lista_rasteve):
 
 
 def read_rastet():
-    """"Qitu i lexojme rastet paraprake ne file
-        #return: liste [infektuar, sheruar, vdekur]"""
-
+    """"Qitu i lexojme rastet paraprake ne file  return: liste [infektuar, sheruar, vdekur]"""
     f = open(CURRENT_DIR + sep + 'info.txt', 'r') # koment
     lines = f.readlines()
     lines = lines[::-1]
@@ -60,11 +58,6 @@ def read_rastet():
     return stats[::-1]
 
 
-def send_notification():
-    # Detyre me dergu notification ne PC
-    print("Nese ka raste te reja dergo notification")
-
-
 if __name__ == '__main__':
     rastet_net = get_rastet_net()
     rastet_file = read_rastet()
@@ -72,12 +65,24 @@ if __name__ == '__main__':
     for i in range(3):
         if rastet_file[i] != rastet_net[i]:
             write_rastet(rastet_net)
-            send_notification()
+            #send_notification()
+            print('Update')
             break
+    
     else:
-        print('Nuk kemi update.')
+        print('No, Update.')
     
 
 
-
-
+def send_notification(msg= mesazhi): 
+    toast = ToastNotifier()
+    toast.show_toast(title="Kallxo - Covid 19", msg= mesazhi, duration=7)
+    while True:
+        time.sleep(1)
+        ora = time.strftime("%H:%M:%S %p")
+        if ora == "18:28:00":
+            print(ora)
+            break
+        else:
+            pass
+send_notification(mesazhi)
