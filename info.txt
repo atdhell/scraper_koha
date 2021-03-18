@@ -1,5 +1,15 @@
 ---------------------------- 
 Data: 03/17/2021, 16:48:23
- Te Infektuar: 78380
- Te Sheruar: 65594
- Te Vdekur: 1723
+ Te Infektuar: 78350
+ Te Sheruar: 65544
+ Te Vdekur: 1703
+---------------------------- 
+Data: 03/18/2021, 19:20:32
+ Te Infektuar: 79069
+ Te Sheruar: 65959
+ Te Vdekur: 1721
+---------------------------- 
+Data: 03/18/2021, 19:22:03
+ Te Infektuar: 79089
+ Te Sheruar: 65979
+ Te Vdekur: 1731
